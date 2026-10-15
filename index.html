@@ -725,7 +725,7 @@
 
 <section class="hero" id="breadHero">
   <p class="hero-label">Gesamtteig</p>
-  <p class="hero-value" id="breadHeroTotal">4350<span>g</span></p>
+  <p class="hero-value" id="breadHeroTotal">4341<span>g</span></p>
   <div class="hero-stats">
     <div class="hero-stat">
       <div class="k">Hydration</div>
@@ -733,7 +733,7 @@
     </div>
     <div class="hero-stat">
       <div class="k">Brote</div>
-      <div class="v" id="breadHeroCount">3 × 1450 g</div>
+      <div class="v" id="breadHeroCount">3 × 1447 g</div>
     </div>
   </div>
 </section>
@@ -1114,9 +1114,9 @@
 
   var BREAD_DEFAULTS = {
     breadCount: 3,
-    breadWeight: 1450,
+    breadWeight: 1447,
     semolaPercent: 50,
-    kartoffelPercent: 33
+    kartoffelPercent: 450 / 1350 * 100 // exakt 33.33% -> reproduziert 450g Kartoffeln bei Standardwerten
   };
 
   // Kalibriert am realen 3-Brote-Rezept: 400g Roggenvollkorn, 400g Wasser (Vorteig),
@@ -1203,11 +1203,11 @@
     elB.breadWeightValue.textContent = breadState.breadWeight + " g";
 
     elB.semolaSlider.value = breadState.semolaPercent;
-    elB.semolaValue.textContent = breadState.semolaPercent + " %";
+    elB.semolaValue.textContent = Math.round(breadState.semolaPercent) + " %";
     setSliderFill(elB.semolaSlider);
 
     elB.kartoffelSlider.value = breadState.kartoffelPercent;
-    elB.kartoffelValue.textContent = breadState.kartoffelPercent + " %";
+    elB.kartoffelValue.textContent = Math.round(breadState.kartoffelPercent) + " %";
     setSliderFill(elB.kartoffelSlider);
 
     elB.breadHeroTotal.innerHTML = fmtG0(r.target).replace(" g", "") + "<span>g</span>";
