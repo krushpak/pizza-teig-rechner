@@ -121,8 +121,61 @@
     max-width: 46ch;
   }
 
+  .panel-intro {
+    margin: 0 0 18px;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    max-width: 46ch;
+  }
+
+  .panel-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--passata);
+    margin: 0 0 6px;
+  }
+
   section {
     margin-bottom: 20px;
+  }
+
+  /* --- Tabs --- */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 14px;
+    padding: 4px;
+    margin-bottom: 20px;
+  }
+
+  .tab-btn {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: none;
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    padding: 10px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  .tab-btn[aria-selected="true"] {
+    background: var(--bg);
+    color: var(--ink);
+    box-shadow: var(--shadow);
   }
 
   .card {
@@ -491,10 +544,19 @@
 <body>
 
 <header>
-  <p class="eyebrow">Biga · 50&nbsp;% Vorteig · reduzierter Trieb</p>
-  <h1>Pizza Teig Rechner</h1>
-  <p>Skaliert Mehl, Wasser, Hefe und Salz auf deine Pizzenanzahl, Teiglingsgröße und Mehlsorte um.</p>
+  <p class="eyebrow">Hausgemacht · selbst gerechnet</p>
+  <h1>Teig Rechner</h1>
 </header>
+
+<div class="tabs" role="tablist">
+  <button type="button" class="tab-btn" id="tabPizzaBtn" role="tab" aria-selected="true" aria-controls="panelPizza">🍕 Pizza</button>
+  <button type="button" class="tab-btn" id="tabBreadBtn" role="tab" aria-selected="false" aria-controls="panelBread">🍞 Sauerteigbrot</button>
+</div>
+
+<div id="panelPizza" role="tabpanel">
+
+<p class="panel-eyebrow">Biga · 50&nbsp;% Vorteig · reduzierter Trieb</p>
+<p class="panel-intro">Skaliert Mehl, Wasser, Hefe und Salz auf deine Pizzenanzahl, Teiglingsgröße und Mehlsorte um.</p>
 
 <section class="hero" id="hero">
   <p class="hero-label">Gesamtteig</p>
@@ -652,9 +714,176 @@
   </div>
 </section>
 
-<footer>
-  Enthält 2&nbsp;% Verarbeitungspuffer. Wasseraufnahme wird aus dem Protein-Gehalt geschätzt (Faustregel) und lässt sich manuell übersteuern.
-</footer>
+<p class="hint" style="text-align:center; margin-top:10px; padding-inline:10px;">Enthält 2&nbsp;% Verarbeitungspuffer. Wasseraufnahme wird aus dem Protein-Gehalt geschätzt (Faustregel) und lässt sich manuell übersteuern.</p>
+
+</div>
+
+<div id="panelBread" role="tabpanel" hidden>
+
+<p class="panel-eyebrow">Roggen-Vorteig · Tag 1–3</p>
+<p class="panel-intro">Skaliert Mehl, Wasser, Salz und Backmalz auf deine Brotanzahl und das gewünschte Gewicht pro Brot um.</p>
+
+<section class="hero" id="breadHero">
+  <p class="hero-label">Gesamtteig</p>
+  <p class="hero-value" id="breadHeroTotal">4350<span>g</span></p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="k">Hydration</div>
+      <div class="v" id="breadHeroHydration">64,7 %</div>
+    </div>
+    <div class="hero-stat">
+      <div class="k">Brote</div>
+      <div class="v" id="breadHeroCount">3 × 1450 g</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Einstellungen</h2>
+  <div class="card">
+
+    <div class="field">
+      <div class="field-row">
+        <span class="field-label">Anzahl Brote</span>
+        <div class="stepper">
+          <button type="button" id="breadCountMinus" aria-label="Weniger Brote">–</button>
+          <span class="val" id="breadCountValue">3</span>
+          <button type="button" id="breadCountPlus" aria-label="Mehr Brote">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-row">
+        <span class="field-label">Gewicht pro Brot</span>
+        <div class="stepper">
+          <button type="button" id="breadWeightMinus" aria-label="Weniger Gramm">–</button>
+          <span class="val" id="breadWeightValue">1450 g</span>
+          <button type="button" id="breadWeightPlus" aria-label="Mehr Gramm">+</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Zubereitung</h2>
+
+  <div class="step-card" style="--step-accent: var(--olive);">
+    <div class="step-head">
+      <span class="step-num">1</span>
+      <h3>Vorteig</h3>
+    </div>
+    <p class="step-timing">Tag 1, ca. 12 Std. vor dem Hauptteig ansetzen (z. B. abends)</p>
+
+    <details class="instructions">
+      <summary><span class="chevron">▸</span> <span aria-hidden="true">📋</span> Rezept / Anleitung</summary>
+      <ol class="steps">
+        <li><span class="n">1.</span><span>Roggenvollkornmehl und Wasser in einer Schüssel gut vermischen.</span></li>
+        <li><span class="n">2.</span><span>Deinen gesamten Sauerteigstarter aus dem Glas dazugeben – am einfachsten etwas vom abgewogenen Wasser ins Glas geben, kurz schütteln und dazugießen, so bekommst du ihn restlos heraus, ohne ihn zu berühren.</span></li>
+        <li><span class="n">3.</span><span>Mit einem sauberen Tuch abdecken und an einem warmen Ort ca. 12 Std. reifen lassen.</span></li>
+      </ol>
+    </details>
+
+    <div class="ingredient-list">
+      <div class="ingredient-row"><span>Roggenvollkornmehl</span><span class="amt" id="breadVorteigFlour">400,9 g</span></div>
+      <div class="ingredient-row"><span>Wasser</span><span class="amt" id="breadVorteigWater">400,9 g</span></div>
+      <div class="ingredient-row"><span>Sauerteigstarter</span><span class="amt">gesamter Inhalt aus dem Glas</span></div>
+    </div>
+    <div class="step-total"><span>Summe Vorteig (zzgl. Starter)</span><span class="amt" id="breadVorteigTotal">801,8 g</span></div>
+  </div>
+
+  <div class="step-card" style="--step-accent: var(--basil);">
+    <div class="step-head">
+      <span class="step-num">2</span>
+      <h3>Hauptteig</h3>
+    </div>
+    <p class="step-timing">Tag 2, morgens mit dem gereiften Vorteig verkneten</p>
+
+    <details class="instructions">
+      <summary><span class="chevron">▸</span> <span aria-hidden="true">📋</span> Rezept / Anleitung</summary>
+      <ol class="steps">
+        <li><span class="n">1.</span><span>Wasser, den fertigen Vorteig sowie Pizzamehl/Semola und Weizenmehl/Kartoffeln in eine große Schüssel geben.</span></li>
+        <li><span class="n">2.</span><span>Vorteig dabei nicht mit den Fingern berühren – Löffel oder Spatel verwenden, um Schimmelbildung zu vermeiden. Ca. 50–70 g Vorteig für den nächsten Ansatz zurückbehalten und kühl lagern.</span></li>
+        <li><span class="n">3.</span><span>Backmalz und Salz dazugeben, alles gut vermengen.</span></li>
+        <li><span class="n">4.</span><span>Mit einem Tuch abdecken, 3–4 Std. bei Raumtemperatur gehen lassen, dann in geölte Backformen füllen.</span></li>
+        <li><span class="n">5.</span><span>Alternativ: Teig direkt in geölte Formen füllen und unabgedeckt über Nacht im Kühlschrank reifen lassen.</span></li>
+      </ol>
+    </details>
+
+    <details class="instructions" style="--step-accent: var(--steel);">
+      <summary><span class="chevron">▸</span> <span aria-hidden="true">🥔</span> Mehl-Varianten</summary>
+      <div class="field" style="margin-top:10px;">
+        <div class="field-row">
+          <span class="field-label">Semola-Anteil (ersetzt Pizzamehl)</span>
+          <span class="slider-value" id="semolaValue" style="color:var(--steel);">50 %</span>
+        </div>
+        <input type="range" id="semolaSlider" min="0" max="50" step="1" value="50">
+      </div>
+      <div class="field">
+        <div class="field-row">
+          <span class="field-label">Kartoffel-Anteil (ersetzt Weizenmehl)</span>
+          <span class="slider-value" id="kartoffelValue" style="color:var(--steel);">33 %</span>
+        </div>
+        <input type="range" id="kartoffelSlider" min="0" max="40" step="1" value="33">
+      </div>
+      <p class="hint">Pizzamehl lässt sich zu bis zu 50&nbsp;% mit Semola (feiner Hartweizengrieß) ersetzen – ergibt eine besonders gute Kruste. Weizenmehl lässt sich teilweise durch gequetschte, gekochte Kartoffeln ersetzen.</p>
+    </details>
+
+    <div class="ingredient-list">
+      <div class="ingredient-row"><span>Wasser, eiskalt</span><span class="amt" id="breadMainWater">1252,9 g</span></div>
+      <div class="ingredient-row"><span>Pizzamehl Typ 00</span><span class="amt" id="breadPizzaMehl">400,9 g</span></div>
+      <div class="ingredient-row" id="semolaRow"><span>Semola</span><span class="amt" id="breadSemola">400,9 g</span></div>
+      <div class="ingredient-row"><span>Weizenmehl Typ 550</span><span class="amt" id="breadWeizen">902,1 g</span></div>
+      <div class="ingredient-row" id="kartoffelRow"><span>Kartoffeln, gequetscht</span><span class="amt" id="breadKartoffeln">451,0 g</span></div>
+      <div class="ingredient-row"><span>Backmalz</span><span class="amt" id="breadMalt">90,2 g</span></div>
+      <div class="ingredient-row"><span>Salz</span><span class="amt" id="breadSalt">50,1 g</span></div>
+    </div>
+    <div class="step-total"><span>Summe Hauptteig</span><span class="amt" id="breadMainTotal">3548,2 g</span></div>
+  </div>
+
+  <div class="step-card" style="--step-accent: var(--olive);">
+    <div class="step-head">
+      <span class="step-num">3</span>
+      <h3>Backen</h3>
+    </div>
+    <p class="step-timing">Tag 3, morgens</p>
+
+    <details class="instructions">
+      <summary><span class="chevron">▸</span> <span aria-hidden="true">📋</span> Rezept / Anleitung</summary>
+      <ol class="steps">
+        <li><span class="n">1.</span><span>Ofen auf 230 °C Umluft vorheizen, eine große Schale Wasser mit in den Ofen stellen – sorgt für Luftfeuchtigkeit, eine schöne Kruste und verhindert trockene Flecken.</span></li>
+        <li><span class="n">2.</span><span>Warten, bis Ofen und Wasser richtig heiß sind. Brote 30 Minuten in der Form auf mittlerer Schiene backen.</span></li>
+        <li><span class="n">3.</span><span>Brote aus der Form nehmen, Wasserschale entfernen, weitere 20–30 Minuten ohne Form fertig backen.</span></li>
+        <li><span class="n">4.</span><span>Für die letzten 30 Minuten die Temperatur etwas reduzieren, damit die Brote nicht zu dunkel werden.</span></li>
+      </ol>
+    </details>
+  </div>
+</section>
+
+<section>
+  <div class="shop-card">
+    <div class="shop-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <h3>Gesamtteig</h3>
+    </div>
+    <div class="ingredient-list">
+      <div class="ingredient-row"><span>Roggenvollkornmehl</span><span class="amt" id="breadTotalRoggen">400,9 g</span></div>
+      <div class="ingredient-row"><span>Pizzamehl Typ 00</span><span class="amt" id="breadTotalPizza">400,9 g</span></div>
+      <div class="ingredient-row" id="semolaTotalRow"><span>Semola</span><span class="amt" id="breadTotalSemola">400,9 g</span></div>
+      <div class="ingredient-row"><span>Weizenmehl Typ 550</span><span class="amt" id="breadTotalWeizen">902,1 g</span></div>
+      <div class="ingredient-row" id="kartoffelTotalRow"><span>Kartoffeln, gequetscht</span><span class="amt" id="breadTotalKartoffeln">451,0 g</span></div>
+      <div class="ingredient-row"><span>Wasser</span><span class="amt" id="breadTotalWater">1653,8 g</span></div>
+      <div class="ingredient-row"><span>Backmalz</span><span class="amt" id="breadTotalMalt">90,2 g</span></div>
+      <div class="ingredient-row"><span>Salz</span><span class="amt" id="breadTotalSalt">50,1 g</span></div>
+    </div>
+  </div>
+</section>
+
+<p class="hint" style="text-align:center; margin-top:10px; padding-inline:10px;">Enthält weder deinen Sauerteigstarter aus dem Glas noch die ca. 50–70&nbsp;g, die du für den nächsten Ansatz zurückbehältst – beides ist keine zugekaufte Zutat.</p>
+
+</div>
 
 <script>
 (function () {
@@ -878,6 +1107,201 @@
     render();
   });
   render();
+
+  // ============================================================
+  // Sauerteigbrot
+  // ============================================================
+
+  var BREAD_DEFAULTS = {
+    breadCount: 3,
+    breadWeight: 1450,
+    semolaPercent: 50,
+    kartoffelPercent: 33
+  };
+
+  // Kalibriert am realen 3-Brote-Rezept: 400g Roggenvollkorn, 400g Wasser (Vorteig),
+  // 1250g Wasser, 400g Pizzamehl, 400g Semola, 900g Weizen550, 450g Kartoffeln,
+  // 90g Backmalz, 50g Salz im Hauptteig -> Gesamtmehl(-äquivalent) 2550g, Wasser 1650g.
+  var BREAD_CONST = {
+    totalFlourEquivRef: 400 + 400 + 400 + 900 + 450,
+    hydration: 1650 / 2550,
+    saltPercent: 50 / 2550,
+    maltPercent: 90 / 2550,
+    roggenShare: 400 / 2550,
+    pizzaSemolaShare: 800 / 2550,
+    weizenKartoffelShare: 1350 / 2550
+  };
+
+  var breadState = loadBreadState();
+
+  function loadBreadState() {
+    try {
+      var raw = localStorage.getItem("sauerteigBrotRechner");
+      if (!raw) return Object.assign({}, BREAD_DEFAULTS);
+      return Object.assign({}, BREAD_DEFAULTS, JSON.parse(raw));
+    } catch (e) {
+      return Object.assign({}, BREAD_DEFAULTS);
+    }
+  }
+
+  function saveBreadState() {
+    try {
+      localStorage.setItem("sauerteigBrotRechner", JSON.stringify(breadState));
+    } catch (e) { /* ignore */ }
+  }
+
+  function calculateBread() {
+    var target = breadState.breadCount * breadState.breadWeight;
+    var flourEq = target / (1 + BREAD_CONST.hydration + BREAD_CONST.saltPercent + BREAD_CONST.maltPercent);
+    var water = flourEq * BREAD_CONST.hydration;
+    var salt = flourEq * BREAD_CONST.saltPercent;
+    var malt = flourEq * BREAD_CONST.maltPercent;
+
+    var roggen = flourEq * BREAD_CONST.roggenShare;
+    var vorteigWater = roggen; // 1:1 Mehl/Wasser-Fütterung, wie im Original (400g/400g)
+
+    var pizzaSemolaBucket = flourEq * BREAD_CONST.pizzaSemolaShare;
+    var semolaFrac = breadState.semolaPercent / 100;
+    var semola = pizzaSemolaBucket * semolaFrac;
+    var pizzaMehl = pizzaSemolaBucket * (1 - semolaFrac);
+
+    var weizenKartoffelBucket = flourEq * BREAD_CONST.weizenKartoffelShare;
+    var kartoffelFrac = breadState.kartoffelPercent / 100;
+    var kartoffeln = weizenKartoffelBucket * kartoffelFrac;
+    var weizen = weizenKartoffelBucket * (1 - kartoffelFrac);
+
+    var hauptteigWater = water - vorteigWater;
+
+    return {
+      target: target,
+      hydration: BREAD_CONST.hydration * 100,
+      vorteig: { roggen: roggen, water: vorteigWater },
+      main: {
+        water: hauptteigWater, pizzaMehl: pizzaMehl, semola: semola,
+        weizen: weizen, kartoffeln: kartoffeln, malt: malt, salt: salt
+      },
+      total: {
+        roggen: roggen, pizzaMehl: pizzaMehl, semola: semola, weizen: weizen,
+        kartoffeln: kartoffeln, water: water, malt: malt, salt: salt
+      }
+    };
+  }
+
+  var elB = {};
+  ["breadCountValue", "breadWeightValue", "breadHeroTotal", "breadHeroHydration", "breadHeroCount",
+   "breadVorteigFlour", "breadVorteigWater", "breadVorteigTotal",
+   "breadMainWater", "breadPizzaMehl", "breadSemola", "breadWeizen", "breadKartoffeln", "breadMalt", "breadSalt", "breadMainTotal",
+   "semolaSlider", "semolaValue", "kartoffelSlider", "kartoffelValue", "semolaRow", "kartoffelRow",
+   "breadTotalRoggen", "breadTotalPizza", "breadTotalSemola", "breadTotalWeizen", "breadTotalKartoffeln",
+   "breadTotalWater", "breadTotalMalt", "breadTotalSalt", "semolaTotalRow", "kartoffelTotalRow"
+  ].forEach(function (id) { elB[id] = document.getElementById(id); });
+
+  function renderBread() {
+    var r = calculateBread();
+
+    elB.breadCountValue.textContent = breadState.breadCount;
+    elB.breadWeightValue.textContent = breadState.breadWeight + " g";
+
+    elB.semolaSlider.value = breadState.semolaPercent;
+    elB.semolaValue.textContent = breadState.semolaPercent + " %";
+    setSliderFill(elB.semolaSlider);
+
+    elB.kartoffelSlider.value = breadState.kartoffelPercent;
+    elB.kartoffelValue.textContent = breadState.kartoffelPercent + " %";
+    setSliderFill(elB.kartoffelSlider);
+
+    elB.breadHeroTotal.innerHTML = fmtG0(r.target).replace(" g", "") + "<span>g</span>";
+    elB.breadHeroHydration.textContent = fmtPct(r.hydration);
+    elB.breadHeroCount.textContent = breadState.breadCount + " × " + breadState.breadWeight + " g";
+
+    elB.breadVorteigFlour.textContent = fmtG(r.vorteig.roggen);
+    elB.breadVorteigWater.textContent = fmtG(r.vorteig.water);
+    elB.breadVorteigTotal.textContent = fmtG(r.vorteig.roggen + r.vorteig.water);
+
+    elB.breadMainWater.textContent = fmtG(r.main.water);
+    elB.breadPizzaMehl.textContent = fmtG(r.main.pizzaMehl);
+    elB.breadWeizen.textContent = fmtG(r.main.weizen);
+    elB.breadMalt.textContent = fmtG(r.main.malt);
+    elB.breadSalt.textContent = fmtG(r.main.salt);
+    elB.breadMainTotal.textContent = fmtG(r.main.water + r.main.pizzaMehl + r.main.semola + r.main.weizen + r.main.kartoffeln + r.main.malt + r.main.salt);
+
+    var hasSemola = r.main.semola > 0.05;
+    elB.semolaRow.hidden = !hasSemola;
+    elB.semolaTotalRow.hidden = !hasSemola;
+    if (hasSemola) {
+      elB.breadSemola.textContent = fmtG(r.main.semola);
+      elB.breadTotalSemola.textContent = fmtG(r.total.semola);
+    }
+
+    var hasKartoffeln = r.main.kartoffeln > 0.05;
+    elB.kartoffelRow.hidden = !hasKartoffeln;
+    elB.kartoffelTotalRow.hidden = !hasKartoffeln;
+    if (hasKartoffeln) {
+      elB.breadKartoffeln.textContent = fmtG(r.main.kartoffeln);
+      elB.breadTotalKartoffeln.textContent = fmtG(r.total.kartoffeln);
+    }
+
+    elB.breadTotalRoggen.textContent = fmtG(r.total.roggen);
+    elB.breadTotalPizza.textContent = fmtG(r.total.pizzaMehl);
+    elB.breadTotalWeizen.textContent = fmtG(r.total.weizen);
+    elB.breadTotalWater.textContent = fmtG(r.total.water);
+    elB.breadTotalMalt.textContent = fmtG(r.total.malt);
+    elB.breadTotalSalt.textContent = fmtG(r.total.salt);
+
+    saveBreadState();
+  }
+
+  document.getElementById("breadCountMinus").addEventListener("click", function () {
+    breadState.breadCount = Math.max(1, breadState.breadCount - 1);
+    renderBread();
+  });
+  document.getElementById("breadCountPlus").addEventListener("click", function () {
+    breadState.breadCount = Math.min(10, breadState.breadCount + 1);
+    renderBread();
+  });
+  document.getElementById("breadWeightMinus").addEventListener("click", function () {
+    breadState.breadWeight = Math.max(500, breadState.breadWeight - 25);
+    renderBread();
+  });
+  document.getElementById("breadWeightPlus").addEventListener("click", function () {
+    breadState.breadWeight = Math.min(2500, breadState.breadWeight + 25);
+    renderBread();
+  });
+  elB.semolaSlider.addEventListener("input", function () {
+    breadState.semolaPercent = parseFloat(elB.semolaSlider.value);
+    renderBread();
+  });
+  elB.kartoffelSlider.addEventListener("input", function () {
+    breadState.kartoffelPercent = parseFloat(elB.kartoffelSlider.value);
+    renderBread();
+  });
+
+  renderBread();
+
+  // ============================================================
+  // Tabs
+  // ============================================================
+
+  var panelPizza = document.getElementById("panelPizza");
+  var panelBread = document.getElementById("panelBread");
+  var tabPizzaBtn = document.getElementById("tabPizzaBtn");
+  var tabBreadBtn = document.getElementById("tabBreadBtn");
+
+  function setActiveTab(tab) {
+    var isPizza = tab === "pizza";
+    panelPizza.hidden = !isPizza;
+    panelBread.hidden = isPizza;
+    tabPizzaBtn.setAttribute("aria-selected", isPizza ? "true" : "false");
+    tabBreadBtn.setAttribute("aria-selected", isPizza ? "false" : "true");
+    try { localStorage.setItem("teigRechnerActiveTab", tab); } catch (e) { /* ignore */ }
+  }
+
+  tabPizzaBtn.addEventListener("click", function () { setActiveTab("pizza"); });
+  tabBreadBtn.addEventListener("click", function () { setActiveTab("bread"); });
+
+  var savedTab = "pizza";
+  try { savedTab = localStorage.getItem("teigRechnerActiveTab") || "pizza"; } catch (e) { /* ignore */ }
+  setActiveTab(savedTab);
 })();
 </script>
 
