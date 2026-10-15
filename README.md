@@ -1,18 +1,22 @@
-# 🍕 Pizza Teig Rechner
+# 💧 Teig Rechner
 
 ![Built with Claude](https://img.shields.io/badge/Built%20with-Claude-D97757)
 ![No build step](https://img.shields.io/badge/build-none-lightgrey)
 
-Ein Rechner für Biga-Pizzateig (50 % Vorteig, reduzierter Trieb): skaliert Mehl, Wasser, Hefe und Salz automatisch nach Anzahl der Pizzen, Teiglingsgröße, Mehl-Protein-Gehalt und Hydration.
+Ein Rechner für drei hausgemachte Teige – skaliert Mehl, Wasser, Hefe/Sauerteig und Salz automatisch nach Stückzahl, Stückgewicht und (je nach Rezept) Mehlsorte, Hydration oder Zutaten-Varianten.
 
 **Live:** https://krushpak.github.io/pizza-teig-rechner/
 
+## Rezepte
+
+- **🍕 Pizza** – Biga-Pizzateig (50 % Vorteig, reduzierter Trieb). Hydration wird aus dem Mehl-Protein-Gehalt geschätzt, lässt sich aber manuell übersteuern. Zusätzliche Pizzen ohne Vorteig lassen sich nachträglich in den Hauptteig einrechnen.
+- **🍞 Weizenbrot** – Helles Sauerteigbrot mit Vorteig, optionalem Semola- und Kartoffel-Anteil.
+- **🌾 Roggenbrot** – Engelmann'scher Flachlaib (EFL#1): Sauerteig + Brühstück aus Roggenschrot, mit Pizzamehl zum Flachlaib verknetet, gebacken im Dampf-Backofen mit gestufter Feuchtigkeit.
+
 ## Funktionen
 
-- Anzahl Pizzen & Gewicht pro Teigling frei einstellbar
-- Hydration wird aus dem Mehl-Protein-Gehalt geschätzt, lässt sich aber jederzeit manuell übersteuern
-- Ausklappbare Schritt-für-Schritt-Anleitung für Biga und Hauptteig
-- Nachträglich zusätzliche Pizzen ohne Vorteig direkt in den Hauptteig einrechenbar (inkl. Hinweis auf zusätzliche Hefe ab 3 Teiglingen)
+- Ausklappbare Schritt-für-Schritt-Anleitung für jeden Zubereitungsschritt
+- Mengen immer frei nach Stückzahl & Stückgewicht skalierbar
 - Läuft komplett offline im Browser – keine Daten verlassen das Gerät, Einstellungen werden nur lokal gespeichert
 - Als Web-App auf dem iPhone-Homescreen nutzbar (Safari → Teilen → „Zum Home-Bildschirm")
 
