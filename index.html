@@ -1214,39 +1214,39 @@
     elB.breadHeroHydration.textContent = fmtPct(r.hydration);
     elB.breadHeroCount.textContent = breadState.breadCount + " × " + breadState.breadWeight + " g";
 
-    elB.breadVorteigFlour.textContent = fmtG(r.vorteig.roggen);
-    elB.breadVorteigWater.textContent = fmtG(r.vorteig.water);
-    elB.breadVorteigTotal.textContent = fmtG(r.vorteig.roggen + r.vorteig.water);
+    elB.breadVorteigFlour.textContent = fmtG0(r.vorteig.roggen);
+    elB.breadVorteigWater.textContent = fmtG0(r.vorteig.water);
+    elB.breadVorteigTotal.textContent = fmtG0(r.vorteig.roggen + r.vorteig.water);
 
-    elB.breadMainWater.textContent = fmtG(r.main.water);
-    elB.breadPizzaMehl.textContent = fmtG(r.main.pizzaMehl);
-    elB.breadWeizen.textContent = fmtG(r.main.weizen);
-    elB.breadMalt.textContent = fmtG(r.main.malt);
-    elB.breadSalt.textContent = fmtG(r.main.salt);
-    elB.breadMainTotal.textContent = fmtG(r.main.water + r.main.pizzaMehl + r.main.semola + r.main.weizen + r.main.kartoffeln + r.main.malt + r.main.salt);
+    elB.breadMainWater.textContent = fmtG0(r.main.water);
+    elB.breadPizzaMehl.textContent = fmtG0(r.main.pizzaMehl);
+    elB.breadWeizen.textContent = fmtG0(r.main.weizen);
+    elB.breadMalt.textContent = fmtG0(r.main.malt);
+    elB.breadSalt.textContent = fmtG0(r.main.salt);
+    elB.breadMainTotal.textContent = fmtG0(r.main.water + r.main.pizzaMehl + r.main.semola + r.main.weizen + r.main.kartoffeln + r.main.malt + r.main.salt);
 
     var hasSemola = r.main.semola > 0.05;
     elB.semolaRow.hidden = !hasSemola;
     elB.semolaTotalRow.hidden = !hasSemola;
     if (hasSemola) {
-      elB.breadSemola.textContent = fmtG(r.main.semola);
-      elB.breadTotalSemola.textContent = fmtG(r.total.semola);
+      elB.breadSemola.textContent = fmtG0(r.main.semola);
+      elB.breadTotalSemola.textContent = fmtG0(r.total.semola);
     }
 
     var hasKartoffeln = r.main.kartoffeln > 0.05;
     elB.kartoffelRow.hidden = !hasKartoffeln;
     elB.kartoffelTotalRow.hidden = !hasKartoffeln;
     if (hasKartoffeln) {
-      elB.breadKartoffeln.textContent = fmtG(r.main.kartoffeln);
-      elB.breadTotalKartoffeln.textContent = fmtG(r.total.kartoffeln);
+      elB.breadKartoffeln.textContent = fmtG0(r.main.kartoffeln);
+      elB.breadTotalKartoffeln.textContent = fmtG0(r.total.kartoffeln);
     }
 
-    elB.breadTotalRoggen.textContent = fmtG(r.total.roggen);
-    elB.breadTotalPizza.textContent = fmtG(r.total.pizzaMehl);
-    elB.breadTotalWeizen.textContent = fmtG(r.total.weizen);
-    elB.breadTotalWater.textContent = fmtG(r.total.water);
-    elB.breadTotalMalt.textContent = fmtG(r.total.malt);
-    elB.breadTotalSalt.textContent = fmtG(r.total.salt);
+    elB.breadTotalRoggen.textContent = fmtG0(r.total.roggen);
+    elB.breadTotalPizza.textContent = fmtG0(r.total.pizzaMehl);
+    elB.breadTotalWeizen.textContent = fmtG0(r.total.weizen);
+    elB.breadTotalWater.textContent = fmtG0(r.total.water);
+    elB.breadTotalMalt.textContent = fmtG0(r.total.malt);
+    elB.breadTotalSalt.textContent = fmtG0(r.total.salt);
 
     saveBreadState();
   }
