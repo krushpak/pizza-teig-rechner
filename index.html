@@ -162,17 +162,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 5px;
     border: none;
     background: transparent;
     font-family: var(--font-body);
-    font-size: 0.92rem;
+    font-size: 0.82rem;
     font-weight: 600;
     color: var(--ink-soft);
-    padding: 10px 10px;
+    padding: 10px 6px;
     border-radius: 10px;
     cursor: pointer;
     touch-action: manipulation;
+    white-space: nowrap;
   }
 
   .tab-btn[aria-selected="true"] {
@@ -553,7 +554,8 @@
 
 <div class="tabs" role="tablist">
   <button type="button" class="tab-btn" id="tabPizzaBtn" role="tab" aria-selected="true" aria-controls="panelPizza">🍕 Pizza</button>
-  <button type="button" class="tab-btn" id="tabBreadBtn" role="tab" aria-selected="false" aria-controls="panelBread">🍞 Sauerteigbrot</button>
+  <button type="button" class="tab-btn" id="tabBreadBtn" role="tab" aria-selected="false" aria-controls="panelBread">🍞 Weizenbrot</button>
+  <button type="button" class="tab-btn" id="tabRoggenBtn" role="tab" aria-selected="false" aria-controls="panelRoggen">🌾 Roggenbrot</button>
 </div>
 
 <div id="panelPizza" role="tabpanel">
@@ -885,6 +887,206 @@
 </section>
 
 <p class="hint" style="text-align:center; margin-top:10px; padding-inline:10px;">Enthält weder deinen Sauerteigstarter aus dem Glas noch die ca. 50–70&nbsp;g, die du für den nächsten Ansatz zurückbehältst – beides ist keine zugekaufte Zutat.</p>
+
+</div>
+
+<div id="panelRoggen" role="tabpanel" hidden>
+
+<p class="panel-eyebrow">Engelmann'scher Flachlaib · EFL#1</p>
+<p class="panel-intro">Sauerteig + Brühstück aus Roggenschrot, mit Pizzamehl zum Flachlaib verknetet. Skaliert auf deine Laibanzahl und das gewünschte Gewicht pro Laib.</p>
+
+<section class="hero" id="roggenHero">
+  <p class="hero-label">Gesamtteig</p>
+  <p class="hero-value" id="roggenHeroTotal">2436<span>g</span></p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="k">Hydration</div>
+      <div class="v" id="roggenHeroHydration">74,1 %</div>
+    </div>
+    <div class="hero-stat">
+      <div class="k">Laibe</div>
+      <div class="v" id="roggenHeroCount">2 × 1218 g</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Einstellungen</h2>
+  <div class="card">
+
+    <div class="field">
+      <div class="field-row">
+        <span class="field-label">Anzahl Laibe</span>
+        <div class="stepper">
+          <button type="button" id="roggenCountMinus" aria-label="Weniger Laibe">–</button>
+          <span class="val" id="roggenCountValue">2</span>
+          <button type="button" id="roggenCountPlus" aria-label="Mehr Laibe">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-row">
+        <span class="field-label">Gewicht pro Laib</span>
+        <div class="stepper">
+          <button type="button" id="roggenWeightMinus" aria-label="Weniger Gramm">–</button>
+          <span class="val" id="roggenWeightValue">1218 g</span>
+          <button type="button" id="roggenWeightPlus" aria-label="Mehr Gramm">+</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Zubereitung</h2>
+
+  <div class="step-card" style="--step-accent: var(--olive);">
+    <div class="step-head">
+      <span class="step-num">1</span>
+      <h3>Sauerteig</h3>
+    </div>
+    <p class="step-timing">Mind. 12 Std. vorher ansetzen, ideal 26–28 °C</p>
+
+    <details class="instructions">
+      <summary><span class="chevron">▸</span> <span aria-hidden="true">📋</span> Rezept / Anleitung</summary>
+      <ol class="steps">
+        <li><span class="n">1.</span><span>Roggenvollkornmehl, warmes Wasser (max. 50 °C) und Sauerteigstarter in einer Schüssel vermischen, bis keine Mehlnester mehr sichtbar sind.</span></li>
+        <li><span class="n">2.</span><span>Mit einem Deckel mit kleinem Loch verschließen und mindestens 12 Std. an einem warmen Ort (ideal 26–28 °C) versauern lassen. Der Ansatz kann je nach Aktivität bis zum Deckel aufsteigen.</span></li>
+        <li><span class="n">3.</span><span>Fertig ist der Sauerteig, wenn er schön porig geworden ist und säuerlich riecht – je länger er versauert, desto flüssiger und säuerlicher wird er.</span></li>
+      </ol>
+    </details>
+
+    <div class="ingredient-list">
+      <div class="ingredient-row"><span>Roggenvollkornmehl</span><span class="amt" id="roggenSauerteigMehl">500 g</span></div>
+      <div class="ingredient-row"><span>Wasser, warm (≤50&nbsp;°C)</span><span class="amt" id="roggenSauerteigWasser">500 g</span></div>
+      <div class="ingredient-row"><span>Sauerteigstarter</span><span class="amt">aktiver Starter aus dem Glas</span></div>
+    </div>
+    <div class="step-total"><span>Summe Sauerteig (zzgl. Starter)</span><span class="amt" id="roggenSauerteigTotal">1000 g</span></div>
+  </div>
+
+  <div class="step-card" style="--step-accent: var(--steel);">
+    <div class="step-head">
+      <span class="step-num">2</span>
+      <h3>Brühstück</h3>
+    </div>
+    <p class="step-timing">Am Backtag, ca. 2–3 Std. vor dem Hauptteig</p>
+
+    <details class="instructions">
+      <summary><span class="chevron">▸</span> <span aria-hidden="true">📋</span> Rezept / Anleitung</summary>
+      <ol class="steps">
+        <li><span class="n">1.</span><span>Roggenschrot (grob gemahlen, z.&nbsp;B. gröbste Stufe der Getreidemühle) mit kochendem Wasser in einer Schüssel übergießen.</span></li>
+        <li><span class="n">2.</span><span>Mit einem Deckel abdecken und ca. 2–3 Std. quellen und abkühlen lassen.</span></li>
+      </ol>
+    </details>
+
+    <details class="instructions" style="--step-accent: var(--steel);">
+      <summary><span class="chevron">▸</span> <span aria-hidden="true">💧</span> Brühstück-Wassermenge</summary>
+      <div class="field" style="margin-top:10px;">
+        <div class="field-row">
+          <span class="field-label">Wasseranteil</span>
+          <span class="slider-value" id="bruehWasserValue" style="color:var(--steel);">125 %</span>
+        </div>
+        <input type="range" id="bruehWasserSlider" min="100" max="150" step="1" value="125">
+      </div>
+      <p class="hint">Original-Rezept: 400–600&nbsp;g Wasser auf 400&nbsp;g Roggenschrot (= 100–150&nbsp;%). Mehr Wasser ergibt ein weicheres Brot.</p>
+    </details>
+
+    <div class="ingredient-list">
+      <div class="ingredient-row"><span>Roggenschrot, grob</span><span class="amt" id="roggenSchrot">400 g</span></div>
+      <div class="ingredient-row"><span>Wasser, kochend</span><span class="amt" id="roggenBruehWasser">500 g</span></div>
+    </div>
+    <div class="step-total"><span>Summe Brühstück</span><span class="amt" id="roggenBruehTotal">900 g</span></div>
+  </div>
+
+  <div class="step-card" style="--step-accent: var(--basil);">
+    <div class="step-head">
+      <span class="step-num">3</span>
+      <h3>Hauptteig</h3>
+    </div>
+    <p class="step-timing">Am Backtag, mit Sauerteig und Brühstück verkneten</p>
+
+    <details class="instructions">
+      <summary><span class="chevron">▸</span> <span aria-hidden="true">📋</span> Rezept / Anleitung</summary>
+      <ol class="steps">
+        <li><span class="n">1.</span><span>Das abgekühlte Brühstück mit dem fertigen Sauerteig vermischen.</span></li>
+        <li><span class="n">2.</span><span>Pizza-Weizenmehl, Brotgewürz, Salz und Backmalz (und ggf. Hefe) dazugeben.</span></li>
+        <li><span class="n">3.</span><span>5–10 Minuten mit der Küchenmaschine (Knethaken) verkneten.</span></li>
+        <li><span class="n">4.</span><span>Teig in gleich große Portionen teilen und in bemehlte Gärkörbchen geben (ca. halbvoll).</span></li>
+        <li><span class="n">5.</span><span>Mit einem Küchenhandtuch abgedeckt an einem warmen Ort (ideal 26&nbsp;°C) gehen lassen, bis der Teig am oberen Rand der Gärkörbchen angekommen ist (oder leicht darüber).</span></li>
+      </ol>
+    </details>
+
+    <details class="instructions" style="--step-accent: var(--steel);">
+      <summary><span class="chevron">▸</span> <span aria-hidden="true">🌾</span> Backmalz &amp; Hefe</summary>
+      <div class="field" style="margin-top:10px;">
+        <div class="field-row">
+          <span class="field-label">Backmalz</span>
+          <span class="slider-value" id="roggenMaltPctValue" style="color:var(--steel);">45 g</span>
+        </div>
+        <input type="range" id="roggenMaltSlider" min="40" max="50" step="1" value="45">
+      </div>
+      <div class="field">
+        <div class="field-row">
+          <span class="field-label">Zusätzliche Hefe (optional)</span>
+          <span class="slider-value" id="roggenHefeValue" style="color:var(--steel);">0 g</span>
+        </div>
+        <input type="range" id="roggenHefeSlider" min="0" max="20" step="1" value="0">
+      </div>
+      <p class="hint">Mengen bezogen auf 2 Laibe à ca. 1218&nbsp;g, skalieren mit deiner Laibanzahl mit. Hefe ist laut Rezept optional ("ggf.") – beschleunigt die Gare, meist nicht nötig.</p>
+    </details>
+
+    <div class="ingredient-list">
+      <div class="ingredient-row"><span>Pizza-Weizenmehl Tipo 00</span><span class="amt" id="roggenWeizen">450 g</span></div>
+      <div class="ingredient-row"><span>Brotgewürz</span><span class="amt" id="roggenGewuerz">10 g</span></div>
+      <div class="ingredient-row"><span>Salz</span><span class="amt" id="roggenSalz">30 g</span></div>
+      <div class="ingredient-row"><span>Backmalz</span><span class="amt" id="roggenMalz">45 g</span></div>
+      <div class="ingredient-row" id="roggenHefeRow"><span>Hefe</span><span class="amt" id="roggenHefe">0 g</span></div>
+    </div>
+    <div class="step-total"><span>Summe Hauptteig-Zutaten</span><span class="amt" id="roggenMainTotal">535 g</span></div>
+  </div>
+
+  <div class="step-card" style="--step-accent: var(--passata);">
+    <div class="step-head">
+      <span class="step-num">4</span>
+      <h3>Backen</h3>
+    </div>
+    <p class="step-timing">Dampf-Backofen, gestufte Feuchtigkeit</p>
+
+    <details class="instructions">
+      <summary><span class="chevron">▸</span> <span aria-hidden="true">📋</span> Rezept / Anleitung</summary>
+      <ol class="steps">
+        <li><span class="n">1.</span><span>Ofen auf 230&nbsp;°C mit 100&nbsp;% Feuchtigkeit vorheizen.</span></li>
+        <li><span class="n">2.</span><span>Teig vorsichtig aus den Gärkörbchen auf ein mit Dauerbackfolie belegtes Rost stürzen und in den Ofen schieben.</span></li>
+        <li><span class="n">3.</span><span>20 Minuten bei 230&nbsp;°C und 100&nbsp;% Feuchtigkeit backen.</span></li>
+        <li><span class="n">4.</span><span>20 Minuten bei 230&nbsp;°C und 60&nbsp;% Feuchtigkeit backen.</span></li>
+        <li><span class="n">5.</span><span>20 Minuten bei 230&nbsp;°C und 30&nbsp;% Feuchtigkeit backen – je nach gewünschter Krustenfestigkeit ggf. anpassen.</span></li>
+      </ol>
+    </details>
+  </div>
+</section>
+
+<section>
+  <div class="shop-card">
+    <div class="shop-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <h3>Gesamtteig</h3>
+    </div>
+    <div class="ingredient-list">
+      <div class="ingredient-row"><span>Roggenvollkornmehl</span><span class="amt" id="roggenTotalVollkorn">500 g</span></div>
+      <div class="ingredient-row"><span>Roggenschrot, grob</span><span class="amt" id="roggenTotalSchrot">400 g</span></div>
+      <div class="ingredient-row"><span>Pizza-Weizenmehl Tipo 00</span><span class="amt" id="roggenTotalWeizen">450 g</span></div>
+      <div class="ingredient-row"><span>Wasser</span><span class="amt" id="roggenTotalWasser">1000 g</span></div>
+      <div class="ingredient-row"><span>Brotgewürz</span><span class="amt" id="roggenTotalGewuerz">10 g</span></div>
+      <div class="ingredient-row"><span>Salz</span><span class="amt" id="roggenTotalSalz">30 g</span></div>
+      <div class="ingredient-row"><span>Backmalz</span><span class="amt" id="roggenTotalMalz">45 g</span></div>
+      <div class="ingredient-row" id="roggenTotalHefeRow"><span>Hefe</span><span class="amt" id="roggenTotalHefe">0 g</span></div>
+    </div>
+  </div>
+</section>
+
+<p class="hint" style="text-align:center; margin-top:10px; padding-inline:10px;">Enthält nicht deinen Sauerteigstarter aus dem Glas. Mehl-Tipp: Roggenmehl &amp; -schrot von Demeter, Pizzamehl von Caputo (blauer Sack) oder eine deutsche Tipo-00-Alternative.</p>
 
 </div>
 
@@ -1282,28 +1484,210 @@
   renderBread();
 
   // ============================================================
+  // Roggenbrot (Engelmann'scher Flachlaib / EFL#1)
+  // ============================================================
+
+  var ROGGEN_DEFAULTS = {
+    roggenCount: 2,
+    roggenWeight: 1218,
+    bruehWasserPercent: 125,
+    maltGrams: 45,
+    hefeGrams: 0
+  };
+
+  // Kalibriert am Original: 500g Roggenvollkornmehl + 500g Wasser (Sauerteig),
+  // 400g Roggenschrot + 500g kochendes Wasser (Brühstück, Mittelwert aus 400-600),
+  // 450g Pizza-Weizenmehl, 10g Brotgewürz, 30g Salz, 45g Backmalz (Mittelwert aus 40-50),
+  // für 2 Laibe -> Referenzmehl 1350g, Referenzwasser 1000g.
+  var ROGGEN_CONST = {
+    totalFlourRef: 500 + 400 + 450,
+    saltPercent: 30 / 1350,
+    spicePercent: 10 / 1350,
+    roggenvollkornShare: 500 / 1350,
+    roggenschrotShare: 400 / 1350,
+    weizenShare: 450 / 1350
+  };
+
+  var roggenState = loadRoggenState();
+
+  function loadRoggenState() {
+    try {
+      var raw = localStorage.getItem("roggenbrotRechner");
+      if (!raw) return Object.assign({}, ROGGEN_DEFAULTS);
+      return Object.assign({}, ROGGEN_DEFAULTS, JSON.parse(raw));
+    } catch (e) {
+      return Object.assign({}, ROGGEN_DEFAULTS);
+    }
+  }
+
+  function saveRoggenState() {
+    try {
+      localStorage.setItem("roggenbrotRechner", JSON.stringify(roggenState));
+    } catch (e) { /* ignore */ }
+  }
+
+  function calculateRoggen() {
+    var target = roggenState.roggenCount * roggenState.roggenWeight;
+    var bruehRatio = roggenState.bruehWasserPercent / 100;
+    var maltp = roggenState.maltGrams / ROGGEN_CONST.totalFlourRef;
+    var hefep = roggenState.hefeGrams / ROGGEN_CONST.totalFlourRef;
+    var rvShare = ROGGEN_CONST.roggenvollkornShare;
+    var rsShare = ROGGEN_CONST.roggenschrotShare;
+    var wShare = ROGGEN_CONST.weizenShare;
+
+    var denom = (2 * rvShare + rsShare * (1 + bruehRatio) + wShare)
+      + ROGGEN_CONST.saltPercent + maltp + ROGGEN_CONST.spicePercent + hefep;
+    var flourEq = target / denom;
+
+    var rv = flourEq * rvShare;
+    var sauerWasser = rv; // 1:1 Mehl/Wasser-Fütterung
+    var rs = flourEq * rsShare;
+    var bruehWasser = rs * bruehRatio;
+    var w = flourEq * wShare;
+    var salz = flourEq * ROGGEN_CONST.saltPercent;
+    var gewuerz = flourEq * ROGGEN_CONST.spicePercent;
+    var malz = flourEq * maltp;
+    var hefe = flourEq * hefep;
+
+    return {
+      target: target,
+      hydration: (sauerWasser + bruehWasser) / (rv + rs + w) * 100,
+      sauerteig: { mehl: rv, wasser: sauerWasser },
+      brueh: { schrot: rs, wasser: bruehWasser },
+      main: { weizen: w, gewuerz: gewuerz, salz: salz, malz: malz, hefe: hefe },
+      total: {
+        vollkorn: rv, schrot: rs, weizen: w, wasser: sauerWasser + bruehWasser,
+        gewuerz: gewuerz, salz: salz, malz: malz, hefe: hefe
+      }
+    };
+  }
+
+  var elR = {};
+  ["roggenCountValue", "roggenWeightValue", "roggenHeroTotal", "roggenHeroHydration", "roggenHeroCount",
+   "roggenSauerteigMehl", "roggenSauerteigWasser", "roggenSauerteigTotal",
+   "bruehWasserSlider", "bruehWasserValue", "roggenSchrot", "roggenBruehWasser", "roggenBruehTotal",
+   "roggenMaltSlider", "roggenMaltPctValue", "roggenHefeSlider", "roggenHefeValue",
+   "roggenWeizen", "roggenGewuerz", "roggenSalz", "roggenMalz", "roggenHefe", "roggenHefeRow", "roggenMainTotal",
+   "roggenTotalVollkorn", "roggenTotalSchrot", "roggenTotalWeizen", "roggenTotalWasser",
+   "roggenTotalGewuerz", "roggenTotalSalz", "roggenTotalMalz", "roggenTotalHefe", "roggenTotalHefeRow"
+  ].forEach(function (id) { elR[id] = document.getElementById(id); });
+
+  function renderRoggen() {
+    var r = calculateRoggen();
+
+    elR.roggenCountValue.textContent = roggenState.roggenCount;
+    elR.roggenWeightValue.textContent = roggenState.roggenWeight + " g";
+
+    elR.bruehWasserSlider.value = roggenState.bruehWasserPercent;
+    elR.bruehWasserValue.textContent = Math.round(roggenState.bruehWasserPercent) + " %";
+    setSliderFill(elR.bruehWasserSlider);
+
+    elR.roggenMaltSlider.value = roggenState.maltGrams;
+    elR.roggenMaltPctValue.textContent = roggenState.maltGrams + " g";
+    setSliderFill(elR.roggenMaltSlider);
+
+    elR.roggenHefeSlider.value = roggenState.hefeGrams;
+    elR.roggenHefeValue.textContent = roggenState.hefeGrams + " g";
+    setSliderFill(elR.roggenHefeSlider);
+
+    elR.roggenHeroTotal.innerHTML = fmtG0(r.target).replace(" g", "") + "<span>g</span>";
+    elR.roggenHeroHydration.textContent = fmtPct(r.hydration);
+    elR.roggenHeroCount.textContent = roggenState.roggenCount + " × " + roggenState.roggenWeight + " g";
+
+    elR.roggenSauerteigMehl.textContent = fmtG0(r.sauerteig.mehl);
+    elR.roggenSauerteigWasser.textContent = fmtG0(r.sauerteig.wasser);
+    elR.roggenSauerteigTotal.textContent = fmtG0(r.sauerteig.mehl + r.sauerteig.wasser);
+
+    elR.roggenSchrot.textContent = fmtG0(r.brueh.schrot);
+    elR.roggenBruehWasser.textContent = fmtG0(r.brueh.wasser);
+    elR.roggenBruehTotal.textContent = fmtG0(r.brueh.schrot + r.brueh.wasser);
+
+    elR.roggenWeizen.textContent = fmtG0(r.main.weizen);
+    elR.roggenGewuerz.textContent = fmtG0(r.main.gewuerz);
+    elR.roggenSalz.textContent = fmtG0(r.main.salz);
+    elR.roggenMalz.textContent = fmtG0(r.main.malz);
+
+    var hasHefe = r.main.hefe > 0.05;
+    elR.roggenHefeRow.hidden = !hasHefe;
+    elR.roggenTotalHefeRow.hidden = !hasHefe;
+    if (hasHefe) {
+      elR.roggenHefe.textContent = fmtG0(r.main.hefe);
+      elR.roggenTotalHefe.textContent = fmtG0(r.total.hefe);
+    }
+
+    elR.roggenMainTotal.textContent = fmtG0(r.main.weizen + r.main.gewuerz + r.main.salz + r.main.malz + r.main.hefe);
+
+    elR.roggenTotalVollkorn.textContent = fmtG0(r.total.vollkorn);
+    elR.roggenTotalSchrot.textContent = fmtG0(r.total.schrot);
+    elR.roggenTotalWeizen.textContent = fmtG0(r.total.weizen);
+    elR.roggenTotalWasser.textContent = fmtG0(r.total.wasser);
+    elR.roggenTotalGewuerz.textContent = fmtG0(r.total.gewuerz);
+    elR.roggenTotalSalz.textContent = fmtG0(r.total.salz);
+    elR.roggenTotalMalz.textContent = fmtG0(r.total.malz);
+
+    saveRoggenState();
+  }
+
+  document.getElementById("roggenCountMinus").addEventListener("click", function () {
+    roggenState.roggenCount = Math.max(1, roggenState.roggenCount - 1);
+    renderRoggen();
+  });
+  document.getElementById("roggenCountPlus").addEventListener("click", function () {
+    roggenState.roggenCount = Math.min(10, roggenState.roggenCount + 1);
+    renderRoggen();
+  });
+  document.getElementById("roggenWeightMinus").addEventListener("click", function () {
+    roggenState.roggenWeight = Math.max(500, roggenState.roggenWeight - 25);
+    renderRoggen();
+  });
+  document.getElementById("roggenWeightPlus").addEventListener("click", function () {
+    roggenState.roggenWeight = Math.min(2500, roggenState.roggenWeight + 25);
+    renderRoggen();
+  });
+  elR.bruehWasserSlider.addEventListener("input", function () {
+    roggenState.bruehWasserPercent = parseFloat(elR.bruehWasserSlider.value);
+    renderRoggen();
+  });
+  elR.roggenMaltSlider.addEventListener("input", function () {
+    roggenState.maltGrams = parseFloat(elR.roggenMaltSlider.value);
+    renderRoggen();
+  });
+  elR.roggenHefeSlider.addEventListener("input", function () {
+    roggenState.hefeGrams = parseFloat(elR.roggenHefeSlider.value);
+    renderRoggen();
+  });
+
+  renderRoggen();
+
+  // ============================================================
   // Tabs
   // ============================================================
 
   var panelPizza = document.getElementById("panelPizza");
   var panelBread = document.getElementById("panelBread");
+  var panelRoggen = document.getElementById("panelRoggen");
   var tabPizzaBtn = document.getElementById("tabPizzaBtn");
   var tabBreadBtn = document.getElementById("tabBreadBtn");
+  var tabRoggenBtn = document.getElementById("tabRoggenBtn");
+
+  var panels = { pizza: panelPizza, bread: panelBread, roggen: panelRoggen };
+  var tabBtns = { pizza: tabPizzaBtn, bread: tabBreadBtn, roggen: tabRoggenBtn };
 
   function setActiveTab(tab) {
-    var isPizza = tab === "pizza";
-    panelPizza.hidden = !isPizza;
-    panelBread.hidden = isPizza;
-    tabPizzaBtn.setAttribute("aria-selected", isPizza ? "true" : "false");
-    tabBreadBtn.setAttribute("aria-selected", isPizza ? "false" : "true");
+    Object.keys(panels).forEach(function (key) {
+      panels[key].hidden = key !== tab;
+      tabBtns[key].setAttribute("aria-selected", key === tab ? "true" : "false");
+    });
     try { localStorage.setItem("teigRechnerActiveTab", tab); } catch (e) { /* ignore */ }
   }
 
   tabPizzaBtn.addEventListener("click", function () { setActiveTab("pizza"); });
   tabBreadBtn.addEventListener("click", function () { setActiveTab("bread"); });
+  tabRoggenBtn.addEventListener("click", function () { setActiveTab("roggen"); });
 
   var savedTab = "pizza";
   try { savedTab = localStorage.getItem("teigRechnerActiveTab") || "pizza"; } catch (e) { /* ignore */ }
+  if (!panels[savedTab]) savedTab = "pizza";
   setActiveTab(savedTab);
 })();
 </script>
