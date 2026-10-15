@@ -725,7 +725,7 @@
 
 <section class="hero" id="breadHero">
   <p class="hero-label">Gesamtteig</p>
-  <p class="hero-value" id="breadHeroTotal">4341<span>g</span></p>
+  <p class="hero-value" id="breadHeroTotal">1447<span>g</span></p>
   <div class="hero-stats">
     <div class="hero-stat">
       <div class="k">Hydration</div>
@@ -733,7 +733,7 @@
     </div>
     <div class="hero-stat">
       <div class="k">Brote</div>
-      <div class="v" id="breadHeroCount">3 × 1447 g</div>
+      <div class="v" id="breadHeroCount">1 × 1447 g</div>
     </div>
   </div>
 </section>
@@ -747,7 +747,7 @@
         <span class="field-label">Anzahl Brote</span>
         <div class="stepper">
           <button type="button" id="breadCountMinus" aria-label="Weniger Brote">–</button>
-          <span class="val" id="breadCountValue">3</span>
+          <span class="val" id="breadCountValue">1</span>
           <button type="button" id="breadCountPlus" aria-label="Mehr Brote">+</button>
         </div>
       </div>
@@ -1113,10 +1113,10 @@
   // ============================================================
 
   var BREAD_DEFAULTS = {
-    breadCount: 3,
+    breadCount: 1,
     breadWeight: 1447,
     semolaPercent: 50,
-    kartoffelPercent: 450 / 1350 * 100 // exakt 33.33% -> reproduziert 450g Kartoffeln bei Standardwerten
+    kartoffelPercent: 450 / 1350 * 100 // exakt 33.33% -> reproduziert saubere Mengen bei 3 Broten
   };
 
   // Kalibriert am realen 3-Brote-Rezept: 400g Roggenvollkorn, 400g Wasser (Vorteig),
