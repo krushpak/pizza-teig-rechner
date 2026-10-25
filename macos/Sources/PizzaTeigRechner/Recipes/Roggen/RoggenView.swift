@@ -17,15 +17,15 @@ struct RoggenView: View {
         RecipePage(eyebrow: "Engelmann'scher Flachlaib · EFL#1",
                    intro: "Sauerteig + Brühstück aus Roggenschrot, mit Pizzamehl zum Flachlaib verknetet. Skaliert auf deine Laibanzahl und das gewünschte Gewicht pro Laib.",
                    footnote: "Enthält nicht deinen Sauerteigstarter aus dem Glas. Mehl-Tipp: Roggenmehl & -schrot von Demeter, Pizzamehl von Caputo (blauer Sack) oder eine deutsche Tipo-00-Alternative.") {
-            SummaryCard(totalGrams: result.target, stats: [
-                SummaryStat(label: "Hydration", value: Fmt.pct1(result.hydration)),
-                SummaryStat(label: "Laibe", value: "\(count) × \(weight) g"),
-            ])
             SectionTitle("Einstellungen")
             Card {
                 StepperField(label: "Anzahl Laibe", value: $count, range: 1...10)
                 StepperField(label: "Gewicht pro Laib", value: $weight, range: 500...2500, step: 25, unit: "g")
             }
+            SummaryCard(totalGrams: result.target, stats: [
+                SummaryStat(label: "Hydration", value: Fmt.pct1(result.hydration)),
+                SummaryStat(label: "Laibe", value: "\(count) × \(weight) g"),
+            ])
         } steps: {
             RoggenSauerteigStep(result: result)
             RoggenBruehStep(result: result, bruehWasserPercent: $bruehWasserPercent)

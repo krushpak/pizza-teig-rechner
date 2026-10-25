@@ -16,15 +16,15 @@ struct BreadView: View {
         RecipePage(eyebrow: "Roggen-Vorteig · Tag 1–3",
                    intro: "Skaliert Mehl, Wasser, Salz und Backmalz auf deine Brotanzahl und das gewünschte Gewicht pro Brot um.",
                    footnote: "Enthält weder deinen Sauerteigstarter aus dem Glas noch die ca. 50–70 g, die du für den nächsten Ansatz zurückbehältst – beides ist keine zugekaufte Zutat.") {
-            SummaryCard(totalGrams: result.target, stats: [
-                SummaryStat(label: "Hydration", value: Fmt.pct1(result.hydration)),
-                SummaryStat(label: "Brote", value: "\(breadCount) × \(breadWeight) g"),
-            ])
             SectionTitle("Einstellungen")
             Card {
                 StepperField(label: "Anzahl Brote", value: $breadCount, range: 1...10)
                 StepperField(label: "Gewicht pro Brot", value: $breadWeight, range: 500...2500, step: 25, unit: "g")
             }
+            SummaryCard(totalGrams: result.target, stats: [
+                SummaryStat(label: "Hydration", value: Fmt.pct1(result.hydration)),
+                SummaryStat(label: "Brote", value: "\(breadCount) × \(breadWeight) g"),
+            ])
         } steps: {
             BreadVorteigStep(result: result)
             BreadMainStep(result: result, semolaPercent: $semolaPercent, kartoffelPercent: $kartoffelPercent)
